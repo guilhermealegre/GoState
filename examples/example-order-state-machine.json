@@ -1,0 +1,14 @@
+{
+  "name": "order-state-machine",
+  "states":[
+    {
+      "name": "being-processed",
+      "transitions" : [
+        { "name": "ready-for-pickup", "check": ["auth(AUTH_2, AUTH_1)"], "on_success":["item-order-state-machine(being-processed, ready-for-pickup)"], "on_error":[]},
+        { "name": "ready-for-shipment", "check": [], "on_success":[], "on_error":[]},
+        { "name": "cancel", "check": [], "on_success":[], "on_error":[]}
+      ]
+    }
+  ]
+}
+
