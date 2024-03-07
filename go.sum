@@ -1,3 +1,7 @@
+bitbucket.org/asadventure/be-core-lib v0.0.0-20231124103607-52f3d75c7986 h1:7DkaKVsoZ1lI/SqJE64gRmTzpoVFN7yxKTcJLvWDLfU=
+bitbucket.org/asadventure/be-core-lib v0.0.0-20231124103607-52f3d75c7986/go.mod h1:RWyZsPTyMSOG/qEgpoARoGsRhW1zBz0kH8oikFoQRUw=
+bitbucket.org/asadventure/be-infrastructure-lib v0.0.0-20240213154740-0ad2500e0942 h1:4aObdZ6EafUpnV6wiuFhWerRt7k93ecoMDN7hveVgIg=
+bitbucket.org/asadventure/be-infrastructure-lib v0.0.0-20240213154740-0ad2500e0942/go.mod h1:f44XnzRXcaV/wykILeokah3Xitfx79A1q0vFzObuP4E=
 github.com/DATA-DOG/go-sqlmock v1.5.0 h1:Shsta01QNfFxHCfpW6YH2STWB0MudeXXEWMr20OEh60=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

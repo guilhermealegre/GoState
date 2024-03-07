@@ -1,14 +1,16 @@
-module state-machine
+module github.com/guilhermealegre/state-machine
 
 go 1.20
 
 require (
+	bitbucket.org/asadventure/be-infrastructure-lib v0.0.0-20240213154740-0ad2500e0942
 	github.com/gocraft/dbr/v2 v2.7.6
 	github.com/lib/pq v1.10.9
 	github.com/spf13/viper v1.18.2
 )
 
 require (
+	bitbucket.org/asadventure/be-core-lib v0.0.0-20231124103607-52f3d75c7986 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect

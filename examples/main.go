@@ -11,7 +11,7 @@ import (
 func main() {
 
 	// database
-	conn, err := dbr.Open("postgres", "host=localhost user=postgres password=password dbname=yonderland sslmode=disable", nil)
+	conn, err := dbr.Open("postgres", "host=localhost auth=postgres password=password dbname=yonderland sslmode=disable", nil)
 	if err != nil {
 		panic(err.Error())
 	}

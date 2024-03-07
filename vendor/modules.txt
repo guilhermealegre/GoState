@@ -1,3 +1,12 @@
+# bitbucket.org/asadventure/be-core-lib v0.0.0-20231124103607-52f3d75c7986
+## explicit; go 1.20
+bitbucket.org/asadventure/be-core-lib/errors
+# bitbucket.org/asadventure/be-infrastructure-lib v0.0.0-20240213154740-0ad2500e0942
+## explicit; go 1.20
+bitbucket.org/asadventure/be-infrastructure-lib/config
+bitbucket.org/asadventure/be-infrastructure-lib/domain/message
+bitbucket.org/asadventure/be-infrastructure-lib/errors
+bitbucket.org/asadventure/be-infrastructure-lib/errors/config
 # github.com/fsnotify/fsnotify v1.7.0
 ## explicit; go 1.17
 github.com/fsnotify/fsnotify
