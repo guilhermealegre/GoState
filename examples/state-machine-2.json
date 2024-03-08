@@ -1,0 +1,27 @@
+{
+  "name": "state-machine-2",
+  "states":[
+    {
+      "name": "state1",
+      "transitions" : [
+        { "name": "state2", "check": [], "on_error":[], "on_success":[]},
+        { "name": "state3", "check": [], "on_error":[], "on_success":[]},
+        { "name": "state5", "check": [], "on_error":[], "on_success":[]}
+      ]
+    },
+    {
+      "name": "state2",
+      "transitions" : [
+        { "name": "state3", "check": [], "on_error":[], "on_success":[]},
+        { "name": "state5", "check": [], "on_error":[], "on_success":[]}
+      ]
+    },
+    {
+      "name": "state-4",
+      "transitions" : [
+        { "name": "state4", "check": [], "on_error":[], "on_success":[]},
+        { "name": "state5", "check": [], "on_error":[], "on_success":[]}
+      ]
+    }
+  ]
+}

@@ -29,7 +29,7 @@ func main() {
 
 	// state machine 1
 	sm1 := state_machine.NewStateMachine()
-	err = sm1.Load("examples/example-order-state-machine.json")
+	err = sm1.Load("examples/state-machine-2.json")
 	if err != nil {
 		fmt.Println("Error parsing state machine:", err)
 		return
@@ -40,7 +40,7 @@ func main() {
 
 	// state machine 2
 	sm2 := state_machine.NewStateMachine()
-	err = sm2.Load("examples/example-item-order-state-machine.json")
+	err = sm2.Load("examples/state-machine-1.json")
 	if err != nil {
 		fmt.Println("Error parsing state machine:", err)
 		return

@@ -2,22 +2,22 @@ package state_machine
 
 import (
 	"bitbucket.org/asadventure/be-infrastructure-lib/errors"
+	"fmt"
 	"github.com/spf13/viper"
 	"os"
-	"strings"
 	"regexp"
+	"strings"
 )
-
 
 func NewStateMachine() IStateMachine {
 	return &StateMachine{
-		MapStates:              	make(map[string]map[string]Handlers),
-		stateMachinesToTriggerMap: 	make(map[string]IStateMachine),
-		CheckHandlers:          	make(map[string]HandlerFunc),
-		OnSuccessHandlers:      	make(map[string]HandlerFunc),
-		OnErrorHandlers:      		make(map[string]HandlerFunc),
-		AdapterHandlers: 		    make(map[string]HandlerAdaptersFunction),
-		FilterHandlers:         	make(map[string]HandlerFilterFunction),
+		MapStates:                 make(map[string]map[string]Handlers),
+		stateMachinesToTriggerMap: make(map[string]IStateMachine),
+		CheckHandlers:             make(map[string]HandlerFunc),
+		OnSuccessHandlers:         make(map[string]HandlerFunc),
+		OnErrorHandlers:           make(map[string]HandlerFunc),
+		AdapterHandlers:           make(map[string]HandlerAdaptersFunction),
+		FilterHandlers:            make(map[string]HandlerFilterFunction),
 	}
 }
 
@@ -27,7 +27,12 @@ func (sm *StateMachine) Load(filePath string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			fmt.Println("problems closing file")
+		}
+	}(file)
 
 	//var test any
 	viper.SetConfigFile(filePath)
@@ -50,30 +55,30 @@ func (sm *StateMachine) Load(filePath string) error {
 		for _, transition := range state.Transitions {
 			var handlers Handlers
 			// add check handlers
-			for _, check := range transition.Check{
+			for _, check := range transition.Check {
 				funcName, args := splitFunctionAndArguments(check.Func)
 				handlers.Check = append(handlers.Check, CheckStruct{
-					Func: funcName,
+					Func:    funcName,
 					FuncArg: args,
 				})
 			}
 			// add on_success handlers
-			for _, onSuccess := range transition.OnSuccess{
+			for _, onSuccess := range transition.OnSuccess {
 				funcName, args := splitFunctionAndArguments(onSuccess.Func)
 				handlers.OnSuccess = append(handlers.OnSuccess, OnSuccessStruct{
-					Func: funcName,
-					FuncArg: args,
-					Adapter: onSuccess.Adapter,
-					Filter: onSuccess.Filter,
+					Func:           funcName,
+					FuncArg:        args,
+					Adapter:        onSuccess.Adapter,
+					Filter:         onSuccess.Filter,
 					IsStateMachine: onSuccess.IsStateMachine,
-					IgnoreError: onSuccess.IgnoreError,
+					IgnoreError:    onSuccess.IgnoreError,
 				})
 			}
 			// add on_error handlers
-			for _, onError := range transition.OnError{
+			for _, onError := range transition.OnError {
 				funcName, args := splitFunctionAndArguments(onError.Func)
 				handlers.OnError = append(handlers.OnError, OnErrorStruct{
-					Func: funcName,
+					Func:    funcName,
 					FuncArg: args,
 				})
 			}
@@ -84,7 +89,6 @@ func (sm *StateMachine) Load(filePath string) error {
 
 	return nil
 }
-
 
 func (sm *StateMachine) GetName() string {
 	return sm.Name
@@ -115,7 +119,6 @@ func (sm *StateMachine) AddAdapterFunction(name string, handler HandlerAdaptersF
 	sm.AdapterHandlers[name] = handler
 }
 
-
 func (sm *StateMachine) AddFilterFunction(name string, handler HandlerFilterFunction) {
 	sm.FilterHandlers[name] = handler
 }
@@ -123,7 +126,6 @@ func (sm *StateMachine) AddFilterFunction(name string, handler HandlerFilterFunc
 func (sm *StateMachine) AddCurrentStateFunction(handler CurrenctStateFunc) {
 	sm.currectState = handler
 }
-
 
 func (sm *StateMachine) ProcessTransition(nextState string, obj any) (err error) {
 
@@ -169,6 +171,7 @@ func (sm *StateMachine) getCheckFunction(name string) HandlerFunc {
 	// it's an internal function
 	return sm.CheckHandlers[name]
 }
+
 func (sm *StateMachine) getOnErrorFunction(name string) HandlerFunc {
 	return sm.OnErrorHandlers[name]
 }
